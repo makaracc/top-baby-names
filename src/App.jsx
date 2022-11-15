@@ -19,7 +19,7 @@ function App() {
       getUniqueTop100Name();
       console.log("yes run api");
     }
-  }, []);
+  }, [data]);
 
   return (
     <div className="App">

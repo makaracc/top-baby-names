@@ -25,6 +25,9 @@ export const Barchart = () => {
   const [query, setQuery] = useState(false);
 
   useEffect(() => {
+    if (babies === null) {
+      return;
+    }
     console.log(
       "babies",
       babies
