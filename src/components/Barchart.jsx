@@ -22,6 +22,8 @@ export const Barchart = () => {
     JSON.parse(window.localStorage.getItem("top100"))
   );
 
+  const [query, setQuery] = useState(false);
+
   useEffect(() => {
     console.log(
       "babies",
@@ -29,7 +31,13 @@ export const Barchart = () => {
         .filter((baby) => baby.year === 2020 && baby.sex === "MALE")
         .map((baby) => baby.name)
     );
-  }, [babies]);
+    data.datasets[0].data = babies
+      .filter((baby) => baby.year === 2020 && baby.sex === "MALE")
+      .map((baby) => baby.count);
+    data.labels = babies
+      .filter((baby) => baby.year === 2020 && baby.sex === "MALE")
+      .map((baby) => baby.name);
+  }, [query, babies]);
 
   return <Pie data={data} />;
 };
