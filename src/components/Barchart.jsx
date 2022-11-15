@@ -10,7 +10,19 @@ export const Barchart = () => {
     JSON.parse(window.sessionStorage.getItem("top100"))
   );
 
-  const [data, setData] = useState({
+  const [boyData, setBoyData] = useState({
+    labels: ["Red", "Blue", "Yellow", "Green"],
+    datasets: [
+      {
+        label: "Top 4 Baby Names",
+        data: [12, 19, 3, 5],
+        backgroundColor: ["#9A1663", "#FF8787", "#BCEAD5", "#8D72E1"],
+        borderColor: ["#9A1663", "#FF8787", "#BCEAD5", "#8D72E1"],
+        borderWidth: 1,
+      },
+    ],
+  });
+  const [girlData, setGirlData] = useState({
     labels: ["Red", "Blue", "Yellow", "Green"],
     datasets: [
       {
@@ -30,19 +42,13 @@ export const Barchart = () => {
       API.getUniqueTop100Name({ setBabies });
       return;
     }
-    console.log(
-      "babies",
-      babies
-        .filter((baby) => baby.year === 2020 && baby.sex === "MALE")
-        .map((baby) => baby.name)
-    );
-    setData((preData) => ({
+    setBoyData((preData) => ({
       ...preData,
       labels: babies
         .filter((baby) => baby.year === 2020 && baby.sex === "MALE")
         .map((baby) => baby.name),
     }));
-    setData((preData) => ({
+    setBoyData((preData) => ({
       ...preData,
       datasets: [
         {
@@ -56,15 +62,38 @@ export const Barchart = () => {
         },
       ],
     }));
-    // setData(
-    //   (data) =>
-    //     (data.labels = babies
-    //       .filter((baby) => baby.year === 2020 && baby.sex === "MALE")
-    //       .map((baby) => baby.name))
-    // );
+    setGirlData((preData) => ({
+      ...preData,
+      labels: babies
+        .filter((baby) => baby.year === 2020 && baby.sex === "FEMALE")
+        .map((baby) => baby.name),
+    }));
+    setGirlData((preData) => ({
+      ...preData,
+      datasets: [
+        {
+          label: "Top 4 Baby Names",
+          data: babies
+            .filter((baby) => baby.year === 2020 && baby.sex === "FEMALE")
+            .map((baby) => baby.count),
+          backgroundColor: ["#9A1663", "#FF8787", "#BCEAD5", "#8D72E1"],
+          borderColor: ["#9A1663", "#FF8787", "#BCEAD5", "#8D72E1"],
+          borderWidth: 1,
+        },
+      ],
+    }));
   }, [query, babies]);
 
-  console.log("data", data.labels);
-
-  return <Pie data={data} />;
+  return (
+    <div className="flex place-items-center flex-row w-[1000px]">
+      <div className="flex place-items-center flex-col flex-1">
+        <Pie data={boyData} />
+        <p>Boy Names 2020</p>
+      </div>
+      <div className="flex place-items-center flex-col flex-1">
+        <Pie data={girlData} />
+        <p>Girl Names 2020</p>
+      </div>
+    </div>
+  );
 };

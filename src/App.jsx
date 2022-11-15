@@ -22,7 +22,7 @@ function App() {
   }, [data]);
 
   return (
-    <div className="App">
+    <div className="App flex justify-center items-center h-screen">
       <Barchart />
     </div>
   );
