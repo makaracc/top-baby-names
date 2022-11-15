@@ -1,14 +1,25 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-
+import { API } from "./api/api";
 import { Barchart } from "./components/Barchart";
 
 function App() {
-  const [data, setData] = useState("");
+  const [data, setData] = useState(
+    JSON.parse(window.localStorage.getItem("top100"))
+  );
+  const [d, setD] = useState("");
 
-  useEffect(() => {}, []);
+  const getUniqueTop100Name = () => {
+    API.getUniqueTop100Name({ setData });
+    console.log("hi");
+  };
 
-  console.log(data);
+  useEffect(() => {
+    if (!data) {
+      getUniqueTop100Name();
+      console.log("yes run api");
+    }
+  }, []);
 
   return (
     <div className="App">
