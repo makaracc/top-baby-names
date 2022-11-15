@@ -20,7 +20,7 @@ export const API = {
     try {
       axios(BASE_URL, axiosConfig).then((r) => {
         r.data;
-        window.localStorage.setItem(
+        window.sessionStorage.setItem(
           "top100",
           JSON.stringify(r.data.popular_baby_names)
         );

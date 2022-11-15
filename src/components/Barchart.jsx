@@ -20,7 +20,7 @@ export const data = {
 
 export const Barchart = () => {
   const [babies, setBabies] = useState(
-    JSON.parse(window.localStorage.getItem("top100"))
+    JSON.parse(window.sessionStorage.getItem("top100"))
   );
 
   const [query, setQuery] = useState(false);

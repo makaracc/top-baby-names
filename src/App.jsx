@@ -5,7 +5,7 @@ import { Barchart } from "./components/Barchart";
 
 function App() {
   const [data, setData] = useState(
-    JSON.parse(window.localStorage.getItem("top100"))
+    JSON.parse(window.sessionStorage.getItem("top100"))
   );
   const [d, setD] = useState("");
 
