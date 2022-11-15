@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
+import { API } from "../api/api";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -26,6 +27,7 @@ export const Barchart = () => {
 
   useEffect(() => {
     if (babies === null) {
+      API.getUniqueTop100Name({ setBabies });
       return;
     }
     console.log(

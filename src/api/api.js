@@ -25,6 +25,7 @@ export const API = {
           JSON.stringify(r.data.popular_baby_names)
         );
         console.log(r.data.popular_baby_names);
+        setData((state) => (state = r.data.popular_baby_names));
       });
     } catch (e) {
       console.log(e);
